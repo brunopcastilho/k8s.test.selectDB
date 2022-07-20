@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  description: "selectDB"
+  version: "1.0.0"
+  title: "selectDB"
+host: "localhost"
+basePath: "/"
+schemes:
+- "https"
+- "http"
+paths:
+  /selectLog/{id}:
+    get:
+      tags:
+      - "select"
+      operationId: "selectLog"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          required: true
+          name: id
+          description: ''
+          type: "integer"
+            
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiModelResponse"
+            
+  /selectLast/{quantity}:
+    get:
+      tags:
+      - "select"
+      operationId: "selectLast"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          required: true
+          name: quantity
+          description: ''
+          type: "integer"
+            
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiModelListResponse"
+                        
+            
+      security:
+        - basicAuth: []
+        
+
+
+securityDefinitions:
+  basicAuth:
+    type: "basic"
+
+definitions:
+
+  ApiModelListResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+      elements:
+        type: array
+        items:
+          $ref: "#/definitions/ApiModelResponse"
+
+  ApiModelResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      id:
+        type: "integer"
+      message:
+        type: "string"
+      dtLog:
+        type: "string"
+  
+  
